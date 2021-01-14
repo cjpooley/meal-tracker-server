@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { routes } from './routes/index.js';
+import { db } from './db';
+import { routes } from './routes';
 
 const app = express();
 
@@ -10,6 +11,11 @@ routes.forEach((route) => {
   app[route.method](route.path, route.handler);
 });
 
-app.listen(8080, () => {
-  console.log('Server is listening on port 8080');
-});
+const start = async () => {
+  await db.connect('mongodb://pooley-server:27017');
+  app.listen(8080, () => {
+    console.log('Server is listening on port 8080');
+  });
+}
+
+start();
