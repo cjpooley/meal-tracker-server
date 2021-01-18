@@ -1,6 +1,7 @@
-import { MongoClient } from 'mongodb';
+import pkg from 'mongodb';
+const { MongoClient } = pkg;
 
-const DB_NAME = '<your db name here>';
+const DB_NAME = 'meal-tracker';
 
 export const db = {
     _dbClient: null,
@@ -21,4 +22,4 @@ export const db = {
 
         return this._dbClient.db(DB_NAME);
     }
-}
+};
